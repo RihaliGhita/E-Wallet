@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAYER</title>
+    <link rel="stylesheet" href="/src/css/dashboard.css">
+</head>
+<body>
+    <div class="sidebar">
+      <div class="sidebar-logo">
+        <img src="/assets/e-Wallet6.gif" alt="Logo E-Wallet">
+        <h2>E-Wallet</h2>
+      </div>
+      <ul class="sidebar-menu">
+        <li><a href="/src/view/dashboard.html">Tableau de bord</a></li>
+        <li><a href="#">Transactions</a></li>
+        <li><a href="#">Envoyer</a></li>
+        <li><a href="#">Profil</a></li>
+        <li><a href="/index.html">Se déconnecter</a></li>
+      </ul>
+    </div>
+    <header class="topbar">
+      <h1 id="welcome_message"> </h1>
+      <span id="date" class="topbar-date"> </span>
+    </header>
+    <h2>Payer un bénéficiaire</h2><br><br><br><br>
+<div class="main-content">
+    <form id="payerForm">
+        <label for="beneficiaire">Bénéficiaire:</label>
+        <input type="text" id="beneficiaire" name="beneficiaire" required><br><br>
+        <label for="amount">Montant:</label>
+        <input type="number" id="amount" name="amount" required><br><br>
+        <p id="result"></p>
+        <button type="button" id="payerBtn">Payer</button>
+        <button type="button" id="ViewBalanceBtn">Voir le solde</button>
+    </form>
+</div>
+<script type="module" src="/src/Controller/Payer.js"></script>
+</body>
+</html>
