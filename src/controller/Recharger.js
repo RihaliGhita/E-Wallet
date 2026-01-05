@@ -1,10 +1,46 @@
+import { recharger } from "../Services/rechargerService.js";
+
+const cardSelect = document.getElementById("cardSelect");
 const amountInput=document.getElementById("amount");
 const rechargerBtn=document.getElementById("rechBtn");
 const result=document.getElementById("result");
 const viewBtn=document.getElementById("ViewBalanceBtn");
 
+const user = JSON.parse(sessionStorage.getItem("currentuser"));
+
+// charger dynamiquement les cartes de l'utilisateur
+cardSelect.innerHTML = "";
+user.cards.forEach(card => {
+    const option = document.createElement("option");
+     option.value = card.NomCarte;
+    option.textContent = `${card.NomCarte}`;//  option.textContent = `${card.NomCarte} - ${card.Balance} DH`;
+    cardSelect.appendChild(option);
+});
 
 rechargerBtn.addEventListener("click",handleRecharger);
+function handleRecharger(){
+    const amount = parseFloat(amountInput.value);
+    const cardName = cardSelect.value;
+     result.textContent="Processing...";
+     if(!amount||amount<=0){  //valider le montant
+            alert("Montant invalide");
+            return;
+        }
+   
+      recharger(user, cardName, amount)
+        .then(() => result.textContent = "Rechargement réussi ")
+        .catch(err => alert(err));
+ }
+
+
+
+viewBtn.addEventListener("click",handleViewBalance);
+function handleViewBalance(){
+    setTimeout(()=> {
+        window.location.href="/src/view/dashboard.html";
+    },1000);
+}
+/*
 function handleRecharger(){
     let montant=parseFloat(amountInput.value);
     result.textContent="Processing...";
@@ -39,14 +75,8 @@ function handleRecharger(){
             amountInput.value="";
 
     },1000);
-}
+}*/
 
-viewBtn.addEventListener("click",handleViewBalance);
-function handleViewBalance(){
-    setTimeout(()=> {
-        window.location.href="/src/view/dashboard.html";
-    },1000);
-}
 
 
     
